@@ -14,8 +14,8 @@
 #ifndef FPS_EXPERIMENTS_H
 #define FPS_EXPERIMENTS_H
 
-void varying_tasks(int MAX_NO_OF_TASKS, int number_of_tasks, int MAX_TASKSETS_PER_SIMULATION, int MIN_PERIOD, int MAX_PERIOD, float DEADLINE_FRACTION, float npr_percentage, float NO_OF_PROCESSORS, int MAX_TIME);
-
+void varying_tasks(int MAX_NO_OF_TASKS, int number_of_tasks, float MIN_UTIL, float MAX_UTIL, int MAX_TASKSETS_PER_SIMULATION, int MIN_PERIOD, int MAX_PERIOD, float npr_percentage, float NO_OF_PROCESSORS, int MAX_TIME);
+void varying_processors(int number_of_tasks, float MIN_UTIL, float MAX_UTIL, int MAX_TASKSETS_PER_SIMULATION, int MIN_PERIOD, int MAX_PERIOD, float npr_percentage, float MIN_NO_PROC, float MAX_NO_PROC, int MAX_TIME);
 
 #endif /* FPS_EXPERIMENTS_H */
 
