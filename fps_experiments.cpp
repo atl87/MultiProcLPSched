@@ -129,7 +129,7 @@ void varying_tasks(int MAX_NO_OF_TASKS, int number_of_tasks, float MIN_UTIL, flo
         
                 preemptions_fps=g_fps_schedule(taskset, NO_OF_PROCESSORS, MAX_TIME, print_log);
                 no_of_preemptions_fps+=preemptions_fps;
-                fps+=taskset_util*preemptions_fps;
+                fps+=(taskset_util*preemptions_fps);
                 
                 count1=count_tasks(taskset);
                 if(count1!=number_of_tasks)
@@ -140,7 +140,7 @@ void varying_tasks(int MAX_NO_OF_TASKS, int number_of_tasks, float MIN_UTIL, flo
                 }
                 
                 preemptions_rds=rds_schedule_modified(taskset, NO_OF_PROCESSORS, MAX_TIME, print_log);
-                rds+=taskset_util*preemptions_rds;
+                rds+=(taskset_util*preemptions_rds);
                 no_of_preemptions_rds+=preemptions_rds;
                 
                 count2=count_tasks(taskset);
@@ -152,7 +152,7 @@ void varying_tasks(int MAX_NO_OF_TASKS, int number_of_tasks, float MIN_UTIL, flo
                 }
                 
                 preemptions_ads=ads_schedule(taskset, NO_OF_PROCESSORS, MAX_TIME, print_log);
-                ads+=taskset_util*preemptions_ads;
+                ads+=(taskset_util*preemptions_ads);
                 no_of_preemptions_ads+=preemptions_ads;
                 
                 count3=count_tasks(taskset);
@@ -166,7 +166,7 @@ void varying_tasks(int MAX_NO_OF_TASKS, int number_of_tasks, float MIN_UTIL, flo
                 taskset=sort_task_set(taskset, DC);
                 preemptions_fps_d_c=g_fps_schedule(taskset, NO_OF_PROCESSORS, MAX_TIME, print_log);
                 no_of_preemptions_fps_d_c+=preemptions_fps_d_c;
-                fps_d_c+=taskset_util*preemptions_fps_d_c;
+                fps_d_c+=(taskset_util*preemptions_fps_d_c);
                 
                 count7=count_tasks(taskset);
                 if(count7!=number_of_tasks)
@@ -177,7 +177,7 @@ void varying_tasks(int MAX_NO_OF_TASKS, int number_of_tasks, float MIN_UTIL, flo
                 }
                 
                 preemptions_rds_d_c=rds_schedule_modified(taskset, NO_OF_PROCESSORS, MAX_TIME, print_log);
-                rds_d_c+=taskset_util*preemptions_rds_d_c;
+                rds_d_c+=(taskset_util*preemptions_rds_d_c);
                 no_of_preemptions_rds_d_c+=preemptions_rds_d_c;
                 
                 count8=count_tasks(taskset);
@@ -189,7 +189,7 @@ void varying_tasks(int MAX_NO_OF_TASKS, int number_of_tasks, float MIN_UTIL, flo
                 }
                 
                 preemptions_ads_d_c=ads_schedule(taskset, NO_OF_PROCESSORS, MAX_TIME, print_log);
-                ads_d_c+=taskset_util*preemptions_ads_d_c;
+                ads_d_c+=(taskset_util*preemptions_ads_d_c);
                 no_of_preemptions_ads_d_c+=preemptions_ads_d_c;
                 
                 count9=count_tasks(taskset);
@@ -344,7 +344,6 @@ void varying_processors(int number_of_tasks, float MIN_UTIL, float MAX_UTIL, int
 
                 float taskset_util=return_utilization(taskset);
                 int preemptions_fps=0, preemptions_rds=0, preemptions_ads=0, count=0, count1=0, count2, count3, count4, count5,count6;               
-                int preemptions_edf=0, preemptions_rds_edf=0, preemptions_ads_edf=0;
                 int preemptions_fps_d_c=0, preemptions_rds_d_c=0, preemptions_ads_d_c=0, count7=0, count8=0, count9;   
                 
                 util_sum+=taskset_util;
@@ -359,7 +358,7 @@ void varying_processors(int number_of_tasks, float MIN_UTIL, float MAX_UTIL, int
         
                 preemptions_fps=g_fps_schedule(taskset, no_of_proc, MAX_TIME, print_log);
                 no_of_preemptions_fps+=preemptions_fps;
-                fps+=taskset_util*preemptions_fps;
+                fps+=(taskset_util*preemptions_fps);
                 
                 count1=count_tasks(taskset);
                 if(count1!=number_of_tasks)
@@ -370,7 +369,7 @@ void varying_processors(int number_of_tasks, float MIN_UTIL, float MAX_UTIL, int
                 }
                 
                 preemptions_rds=rds_schedule_modified(taskset, no_of_proc, MAX_TIME, print_log);
-                rds+=taskset_util*preemptions_rds;
+                rds+=(taskset_util*preemptions_rds);
                 no_of_preemptions_rds+=preemptions_rds;
                 
                 count2=count_tasks(taskset);
@@ -382,7 +381,7 @@ void varying_processors(int number_of_tasks, float MIN_UTIL, float MAX_UTIL, int
                 }
                 
                 preemptions_ads=ads_schedule(taskset, no_of_proc, MAX_TIME, print_log);
-                ads+=taskset_util*preemptions_ads;
+                ads+=(taskset_util*preemptions_ads);
                 no_of_preemptions_ads+=preemptions_ads;
                 
                 count3=count_tasks(taskset);
@@ -397,7 +396,7 @@ void varying_processors(int number_of_tasks, float MIN_UTIL, float MAX_UTIL, int
                 taskset=sort_task_set(taskset, DC);
                 preemptions_fps_d_c=g_fps_schedule(taskset, no_of_proc, MAX_TIME, print_log);
                 no_of_preemptions_fps_d_c+=preemptions_fps_d_c;
-                fps_d_c+=taskset_util*preemptions_fps_d_c;
+                fps_d_c+=(taskset_util*preemptions_fps_d_c);
                 
                 count7=count_tasks(taskset);
                 if(count7!=number_of_tasks)
@@ -408,7 +407,7 @@ void varying_processors(int number_of_tasks, float MIN_UTIL, float MAX_UTIL, int
                 }
                 
                 preemptions_rds_d_c=rds_schedule_modified(taskset, no_of_proc, MAX_TIME, print_log);
-                rds_d_c+=taskset_util*preemptions_rds_d_c;
+                rds_d_c+=(taskset_util*preemptions_rds_d_c);
                 no_of_preemptions_rds_d_c+=preemptions_rds_d_c;
                 
                 count8=count_tasks(taskset);
@@ -420,7 +419,7 @@ void varying_processors(int number_of_tasks, float MIN_UTIL, float MAX_UTIL, int
                 }
                 
                 preemptions_ads_d_c=ads_schedule(taskset, no_of_proc, MAX_TIME, print_log);
-                ads_d_c+=taskset_util*preemptions_ads_d_c;
+                ads_d_c+=(taskset_util*preemptions_ads_d_c);
                 no_of_preemptions_ads_d_c+=preemptions_ads_d_c;
                 
                 count9=count_tasks(taskset);
