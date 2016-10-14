@@ -38,6 +38,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Task_Gen.o \
 	${OBJECTDIR}/Tasks.o \
 	${OBJECTDIR}/edf_schedulers.o \
+	${OBJECTDIR}/fps_experiments.o \
 	${OBJECTDIR}/fps_schedulers.o \
 	${OBJECTDIR}/fps_tests.o \
 	${OBJECTDIR}/main.o \
@@ -82,6 +83,11 @@ ${OBJECTDIR}/edf_schedulers.o: edf_schedulers.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/edf_schedulers.o edf_schedulers.cpp
+
+${OBJECTDIR}/fps_experiments.o: fps_experiments.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/fps_experiments.o fps_experiments.cpp
 
 ${OBJECTDIR}/fps_schedulers.o: fps_schedulers.cpp
 	${MKDIR} -p ${OBJECTDIR}
