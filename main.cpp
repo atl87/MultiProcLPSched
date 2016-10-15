@@ -43,7 +43,7 @@ int main(int argc, char** argv) {
     float MAX_UTIL=(NO_OF_PROCESSORS/2)+0.1000;
     
     varying_tasks(MAX_NO_OF_TASKS, number_of_tasks, MIN_UTIL, MAX_UTIL, MAX_TASKSETS_PER_SIMULATION, MIN_PERIOD, MAX_PERIOD, npr_percentage, NO_OF_PROCESSORS, MAX_TIME);
-    varying_processors(MAX_NO_OF_TASKS, MIN_UTIL, MAX_UTIL, MAX_TASKSETS_PER_SIMULATION, MIN_PERIOD, MAX_PERIOD, npr_percentage, MIN_NO_PROC, MAX_NO_PROC, MAX_TIME);
+//    varying_processors(MAX_NO_OF_TASKS, MIN_UTIL, MAX_UTIL, MAX_TASKSETS_PER_SIMULATION, MIN_PERIOD, MAX_PERIOD, npr_percentage, MIN_NO_PROC, MAX_NO_PROC, MAX_TIME);
 
 
 }
