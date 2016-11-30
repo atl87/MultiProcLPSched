@@ -231,6 +231,11 @@ void varying_tasks(int MAX_NO_OF_TASKS, int number_of_tasks, float MIN_UTIL, flo
                 sched_rds+=result_rds;
                 w_sched_rds+=(taskset_util*(float)result_rds);
                 
+                int result_ads_exact=lazy_lp_fps_rta(taskset, NO_OF_PROCESSORS, print_log, print_basic);
+                sched_ads_exact+=result_ads_exact;
+                w_sched_ads_exact+=(taskset_util*(float)result_ads_exact);
+
+                
                 generate_inflated_taskset(taskset);
                 
                 int result_ads_link=lazy_lp_fps_test_linkbased(taskset, NO_OF_PROCESSORS, print_log, print_basic);
@@ -255,7 +260,7 @@ void varying_tasks(int MAX_NO_OF_TASKS, int number_of_tasks, float MIN_UTIL, flo
                 cout<<"\nPreemptions P-FPS_d_c: "<<(no_of_preemptions_fps_d_c/MAX_TASKSETS_PER_SIMULATION)<<" Preemptions RDS-FPS_d_c: "<<(no_of_preemptions_rds_d_c/MAX_TASKSETS_PER_SIMULATION);
                 cout<<" Preemptions ADS-FPS_d_c: "<<(no_of_preemptions_ads_d_c/MAX_TASKSETS_PER_SIMULATION);
                 
-                cout<<"\nSchedulability P-FPS_d_c: "<<sched_fps<<" Eager FPS: "<<sched_rds<<" Link based: "<<sched_ads_link;
+                cout<<"\nSchedulability P-FPS_d_c: "<<sched_fps<<" Eager-LP-FPS: "<<sched_rds<<" Link based: "<<sched_ads_link<<" Lazy-LP-FPS-exact: "<<sched_ads_exact;
             }
             
             cur_util=cur_util+0.1;
@@ -263,11 +268,11 @@ void varying_tasks(int MAX_NO_OF_TASKS, int number_of_tasks, float MIN_UTIL, flo
         
         f_weighted<<(fps/util_sum)<<"\t"<<(rds/util_sum)<<"\t"<<(ads/util_sum)<<"\t"<<(fps_d_c/util_sum)<<"\t"<<(rds_d_c/util_sum)<<"\t"<<(ads_d_c/util_sum)<<"\n";
         f_normal<<"\n\n";
-        f_sched_weighted<<(w_sched_fps/util_sum)<<"\t"<<(w_sched_rds/util_sum)<<"\t"<<(w_sched_ads_link/util_sum)<<"\t"<<(sched_ads_exact/util_sum)<<"\n";
+        f_sched_weighted<<(w_sched_fps/util_sum)<<"\t"<<(w_sched_rds/util_sum)<<"\t"<<(w_sched_ads_link/util_sum)<<"\t"<<(w_sched_ads_exact/util_sum)<<"\n";
         
 //        cout<<"\n\nWeighted preemptions P-FPS: "<<(fps/util_sum)<<" Weighted preemptions RDS-FPS: "<<(rds/util_sum)<<" Weighted preemptions ADS-FPS: "<<(ads/util_sum);
         cout<<"\n\nWeighted preemptions P-FPS_d_c: "<<(fps_d_c/util_sum)<<" Weighted preemptions RDS-FPS_d_c: "<<(rds_d_c/util_sum)<<" Weighted preemptions ADS-FPS_d_c: "<<(ads_d_c/util_sum);        
-        cout<<"\nWighted Sched P_FPS_d_c: "<<(w_sched_fps/util_sum)<<" Eager FPS:"<<(w_sched_rds/util_sum)<<" Link based: "<<(w_sched_ads_link/util_sum);
+        cout<<"\nWighted Sched P_FPS_d_c: "<<(w_sched_fps/util_sum)<<" Eager FPS:"<<(w_sched_rds/util_sum)<<" Link based: "<<(w_sched_ads_link/util_sum)<<" Lazy-LP-FPS-exact: "<<(w_sched_ads_exact/util_sum)<<"\n";;
         number_of_tasks+=2;
     }
     
@@ -509,6 +514,12 @@ void varying_processors(int number_of_tasks, float MIN_UTIL, float MAX_UTIL, int
                 sched_rds+=result_rds;
                 w_sched_rds+=((float)result_rds*taskset_util);
                 
+                int result_ads_exact=lazy_lp_fps_rta(taskset, no_of_proc, 0, 0);
+                sched_ads_exact+=result_ads_exact;
+                w_sched_ads_exact+=(taskset_util*(float)result_ads_exact);
+                
+                generate_inflated_taskset(taskset);
+                
                 int result_ads_link=lazy_lp_fps_test_linkbased(taskset, no_of_proc,0,0);
                 sched_ads_link+=result_ads_link;
                 w_sched_ads_link+=((float)result_ads_link*taskset_util);
@@ -548,7 +559,7 @@ void varying_processors(int number_of_tasks, float MIN_UTIL, float MAX_UTIL, int
         cout<<"\n\nWeighted preemptions P-FPS_d_c: "<<(fps_d_c/util_sum)<<" Weighted preemptions RDS-FPS_d_c: "<<(rds_d_c/util_sum)<<" Weighted preemptions ADS-FPS_d_c: "<<(ads_d_c/util_sum);
         
         
-        cout<<"\nWeighted sched P-FPS: "<<(w_sched_fps/util_sum)<<" Weighted sched eager-FPS: "<<(w_sched_rds/util_sum)<<" Weighted sched lazy-FPS (link): "<<(w_sched_ads_link/util_sum);
+        cout<<"\nWeighted sched P-FPS: "<<(w_sched_fps/util_sum)<<" Weighted sched eager-FPS: "<<(w_sched_rds/util_sum)<<" Weighted sched lazy-FPS (link): "<<(w_sched_ads_link/util_sum)<<" Weighted sched lazy-FPS (exact): "<<w_sched_ads_exact;
       
         no_of_proc+=2;
     }

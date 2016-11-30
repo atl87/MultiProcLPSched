@@ -14,6 +14,9 @@
 #ifndef UTILITY_FUNCTIONS_H
 #define UTILITY_FUNCTIONS_H
 
+#include "Tasks.h"
+
+
 float max_of(float a1, float a2);
 float min_of(float a1, float a2);
 float body_jobs(real_time_taskset *task, float t);
@@ -25,6 +28,7 @@ float blocking_from_m_tasks(real_time_taskset *task, int m);
 float blocking_from_m_tasks_afterstart(real_time_taskset *task, int m);
 float NP_blocking_from_m_tasks(real_time_taskset *task, int m);
 float calc_no_of_preemptions(real_time_taskset *taskset, real_time_taskset *current_task, float t);
+float calculate_lazy_blocking(real_time_taskset *task, int m);
 
 
 #endif /* UTILITY_FUNCTIONS_H */

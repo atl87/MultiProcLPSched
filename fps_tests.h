@@ -18,8 +18,8 @@ int quick_test_RTA_FPS(real_time_taskset *taskset, float number_of_proc, int pri
 int bertogna_chirinei_lipari(real_time_taskset *taskset, float number_of_proc, int print_log, int print_result);
 int p_fps_test_guan(real_time_taskset *taskset, float number_of_proc, int print_log, int print_result);
 int lazy_lp_fps_test_linkbased(real_time_taskset *taskset, float number_of_proc, int print_log, int print_result);
+int lazy_lp_fps_rta(real_time_taskset *taskset, float number_of_proc, int print_log, int print_result);
 int eager_lp_fps_rta(real_time_taskset *taskset, float number_of_proc, int print_log, int print_result);
-
 
 
 #endif /* FPS_TESTS_H */

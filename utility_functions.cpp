@@ -75,6 +75,39 @@ float sum_largest(float diff[100], int m)
     
     return sum;
 }
+float calculate_lazy_blocking(real_time_taskset *task, int m)
+{
+    real_time_taskset * help=task->next_task;
+    float blocking[100];
+    int max=0;
+    float sum=0;
+    for(int i=0;i<100;i++)
+        blocking[i]=(float)0.0000;
+    
+    while(help)
+    {
+        blocking[max++]=help->largest_NPR;
+        help=help->next_task;
+    }
+    blocking[max++]=task->largest_NPR; 
+    for(int i=0;i<max;i++)
+    {
+        for(int j=i+1;j < max; j++)
+        {
+            if(blocking[i]<blocking[j])
+            {
+                float dummy=blocking[i];
+                blocking[i]=blocking[j];
+                blocking[j]=dummy;
+            } 
+        }
+    }
+    
+    for(int i=1;i<=max;i++)
+        sum+=blocking[i]*(m-i+1);
+    
+    return sum;
+}
 
 float blocking_from_m_tasks(real_time_taskset *task, int m)
 {

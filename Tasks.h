@@ -36,6 +36,7 @@ struct real_time_taskset{
     float RT;
     float RT_our;
     float RT_guan;
+    float RT_lazy_exact;
     float RT_link;
     float RT_np;
     

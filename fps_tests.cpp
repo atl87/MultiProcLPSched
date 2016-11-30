@@ -330,6 +330,82 @@ int lazy_lp_fps_test_linkbased(real_time_taskset *taskset, float number_of_proc,
     }              
 }
 
+int lazy_lp_fps_rta(real_time_taskset *taskset, float number_of_proc, int print_log, int print_result)
+{
+    real_time_taskset *helper=taskset;
+    int test_failed=0;
+    float response_time=(float)0.00, new_response_time=(float)0.00, interference=(float)0.00;
+    
+    float diff[100];
+    for(int s=0;s<100;s++)
+            diff[s]=(float)0.0000;
+    
+    while(helper)
+    {
+        new_response_time=helper->comp_time - helper->largest_NPR + 1 + calculate_lazy_blocking(helper,number_of_proc);
+
+        do{
+        real_time_taskset *higher_priority_task=taskset;
+        response_time=new_response_time;
+        interference=(float) 0.00000;
+        int i=0;
+        
+        while(higher_priority_task!=helper){
+            
+            float no_carry_in=interference_of_task_without_CI(higher_priority_task,response_time);
+            
+            float interference2= response_time - helper->comp_time +1;
+            if(interference2 < no_carry_in)
+                no_carry_in=interference2;                     
+            
+            interference+=no_carry_in;
+            
+            float with_carry_in=interference_of_task_with_CI(higher_priority_task,response_time);
+            
+            if(interference2 < with_carry_in)
+                with_carry_in=interference2;
+            
+            diff[i++]=with_carry_in - no_carry_in;
+            
+            higher_priority_task=higher_priority_task->next_task;
+        }
+        
+        sort(diff,i-1);
+        interference+=sum_largest(diff,(int)number_of_proc-1);
+               
+        new_response_time=helper->comp_time - helper->largest_NPR + 1 + (floor(interference/number_of_proc));
+        }while(response_time!=new_response_time && new_response_time <= helper->deadline);
+        
+        helper->RT=new_response_time - 1 + helper->largest_NPR;
+        helper->RT_lazy_exact=helper->RT;
+        if(print_log)
+            cout<<"\n\t[Lazy exact:]: "<<helper->task_no<<" : "<<helper->RT<<" (dl : "<<helper->deadline<<")"; 
+        
+        if(helper->RT_lazy_exact > helper->deadline)
+        {
+            test_failed=1;   
+            if(print_log)
+                cout<<"**";
+        }
+   
+        helper=helper->next_task;
+    }
+      
+    if(test_failed)
+    {
+        if(print_result)
+            cout<<"\n\tTaskset NOT SCHEDULABLE by Guan et al.";
+        return 0;
+    }
+    else
+    {
+         if(print_result)
+             cout<<"\n\tTaskset IS SCHEDULABLE by Guan et al. !!!!!";
+        return 1;
+    }
+        
+}
+
 int eager_lp_fps_rta(real_time_taskset *taskset, float number_of_proc, int print_log, int print_result)
 {   
     real_time_taskset *helper=taskset;
