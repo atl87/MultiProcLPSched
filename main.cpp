@@ -24,7 +24,7 @@ using namespace std;
 int main(int argc, char** argv) {
     
     int MAX_NO_OF_TASKS=32;
-    int MAX_TASKSETS_PER_SIMULATION=100;
+    int MAX_TASKSETS_PER_SIMULATION=500;
     int number_of_tasks=6;
     int MAX_PERIOD=490;
     int MIN_PERIOD=10;
@@ -38,7 +38,7 @@ int main(int argc, char** argv) {
        
     float NO_OF_PROCESSORS=(float)4.0000;   
     
-    int MAX_TIME=10000;
+    int MAX_TIME=1000;
     float MIN_UTIL=1.0000;
     float MAX_UTIL=(NO_OF_PROCESSORS/2)+0.1000;
     

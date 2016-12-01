@@ -342,7 +342,8 @@ int lazy_lp_fps_rta(real_time_taskset *taskset, float number_of_proc, int print_
     
     while(helper)
     {
-        new_response_time=helper->comp_time - helper->largest_NPR + 1 + calculate_lazy_blocking(helper,number_of_proc);
+        float lazy_blocking=calculate_lazy_blocking(helper,number_of_proc);
+        new_response_time=helper->comp_time - helper->largest_NPR + 1 + lazy_blocking;
 
         do{
         real_time_taskset *higher_priority_task=taskset;
@@ -371,7 +372,7 @@ int lazy_lp_fps_rta(real_time_taskset *taskset, float number_of_proc, int print_
         }
         
         sort(diff,i-1);
-        interference+=sum_largest(diff,(int)number_of_proc-1);
+        interference+=sum_largest(diff,(int)number_of_proc-1)+ lazy_blocking;
                
         new_response_time=helper->comp_time - helper->largest_NPR + 1 + (floor(interference/number_of_proc));
         }while(response_time!=new_response_time && new_response_time <= helper->deadline);
@@ -394,13 +395,13 @@ int lazy_lp_fps_rta(real_time_taskset *taskset, float number_of_proc, int print_
     if(test_failed)
     {
         if(print_result)
-            cout<<"\n\tTaskset NOT SCHEDULABLE by Guan et al.";
+            cout<<"\n\tTaskset NOT SCHEDULABLE by Lazy exact.";
         return 0;
     }
     else
     {
          if(print_result)
-             cout<<"\n\tTaskset IS SCHEDULABLE by Guan et al. !!!!!";
+             cout<<"\n\tTaskset IS SCHEDULABLE by Lazy exact !!!!!";
         return 1;
     }
         
