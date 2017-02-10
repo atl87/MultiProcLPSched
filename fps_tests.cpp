@@ -59,13 +59,13 @@ int quick_test_RTA_FPS(real_time_taskset *taskset, float number_of_proc, int pri
     if(test_failed)
     {
         if(print_result)
-            cout<<"\n\tTaskset NOT SCHEDULABLE by QUICK";
+            cout<<"\n\tTaskset NOT SCHEDULABLE by [G-P-FPS: Quick test]";
         return 0;
     }
     else
     {
         if(print_result)
-            cout<<"\n\tTaskset IS SCHEDULABLE by QUICK !!!!!";
+            cout<<"\n\tTaskset IS SCHEDULABLE by [G-P-FPS: Quick test]";
         return 1;
     }
 }
@@ -135,13 +135,13 @@ int bertogna_chirinei_lipari(real_time_taskset *taskset, float number_of_proc, i
     if(test_failed)
     {
         if(print_result)
-            cout<<"\n\tTaskset NOT SCHEDULABLE by BCL";        
+            cout<<"\n\tTaskset NOT SCHEDULABLE by [G-P-FPS: Bertogna's test]";        
         return 0;
     }
     else
     {
         if(print_result)
-            cout<<"\n\tTaskset IS SCHEDULABLE by BCL !!!!!";
+            cout<<"\n\tTaskset IS SCHEDULABLE by [G-P-FPS: Bertogna's test]";
         return 1;
     }
 }
@@ -225,13 +225,13 @@ int p_fps_test_guan(real_time_taskset *taskset, float number_of_proc, int print_
     if(test_failed)
     {
         if(print_result)
-            cout<<"\n\tTaskset NOT SCHEDULABLE by Guan et al.";
+            cout<<"\n\tTaskset is NOT SCHEDULABLE by [G-P-FPS: Guan's test]";
         return 0;
     }
     else
     {
          if(print_result)
-             cout<<"\n\tTaskset IS SCHEDULABLE by Guan et al. !!!!!";
+             cout<<"\n\tTaskset is SCHEDULABLE by [G-P-FPS: Guan's test]";
         return 1;
     }
               
@@ -319,13 +319,13 @@ int lazy_lp_fps_test_linkbased(real_time_taskset *taskset, float number_of_proc,
     if(test_failed)
     {
         if(print_result)
-            cout<<"\n\tTaskset NOT SCHEDULABLE by Link based et al.";
+            cout<<"\n\tTaskset is NOT SCHEDULABLE by [G-LP-FPS with LPA-link_based]";
         return 0;
     }
     else
     {
          if(print_result)
-             cout<<"\n\tTaskset IS SCHEDULABLE by Link based et al. !!!!!";
+             cout<<"\n\tTaskset is SCHEDULABLE by [G-LP-FPS with LPA-link_based]";
         return 1;
     }              
 }
@@ -395,13 +395,13 @@ int lazy_lp_fps_rta(real_time_taskset *taskset, float number_of_proc, int print_
     if(test_failed)
     {
         if(print_result)
-            cout<<"\n\tTaskset NOT SCHEDULABLE by Lazy exact.";
+            cout<<"\n\tTaskset is NOT SCHEDULABLE by [G-LP-FPS with LPA-exact]";
         return 0;
     }
     else
     {
          if(print_result)
-             cout<<"\n\tTaskset IS SCHEDULABLE by Lazy exact !!!!!";
+             cout<<"\n\tTaskset is SCHEDULABLE by [G-LP-FPS with LPA-exact]";
         return 1;
     }
         
@@ -417,7 +417,7 @@ int eager_lp_fps_rta(real_time_taskset *taskset, float number_of_proc, int print
     while(helper)
     {
         float total_blocking_before_start=blocking_from_m_tasks(helper,number_of_proc);
-        if(print_result)
+        if(print_log)
             cout<<" Block: "<<total_blocking_before_start;
 
         float total_blocking_after_start=blocking_from_m_tasks_afterstart(helper,number_of_proc-1);
@@ -489,13 +489,13 @@ int eager_lp_fps_rta(real_time_taskset *taskset, float number_of_proc, int print
     if(test_failed)
     {
         if(print_result)
-            cout<<"\n\tTaskset NOT schedulable by [G-LP-FPS with EPA]";
+            cout<<"\n\tTaskset is NOT SCHEDULABLE by [G-LP-FPS with EPA]";
         return 0;
     }
     else
     {
          if(print_result)
-             cout<<"\n\tTaskset is schedulable by [G-LP-FPS with EPA]";
+             cout<<"\n\tTaskset is SCHEDULABLE by [G-LP-FPS with EPA]";
         return 1;
     }              
 }

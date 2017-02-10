@@ -40,7 +40,7 @@ void varying_tasks(int MAX_NO_OF_TASKS, int number_of_tasks, float MIN_UTIL, flo
         exit(1);
     }   
 /******************************CONTROL VARIABLES******************************/    
-    int print_basic=0;
+    int print_basic=1;
     int print_log=0;
     int print_inter=0;
          
@@ -104,6 +104,7 @@ void varying_tasks(int MAX_NO_OF_TASKS, int number_of_tasks, float MIN_UTIL, flo
             sched_ads_exact=0;
             while(counter<=MAX_TASKSETS_PER_SIMULATION)
             {
+                cout<<"\n\nTaskset number: "<<counter;
                 DEADLINE_FRACTION=((float) rand() / (RAND_MAX))+0.7;
                 if(DEADLINE_FRACTION>1.000)
                     DEADLINE_FRACTION=1.0000;
@@ -223,11 +224,11 @@ void varying_tasks(int MAX_NO_OF_TASKS, int number_of_tasks, float MIN_UTIL, flo
                     exit(1);       
                 }
                 
-                int result_p_fps=p_fps_test_guan(taskset, NO_OF_PROCESSORS, 0,0);
+                int result_p_fps=p_fps_test_guan(taskset, NO_OF_PROCESSORS, print_log, print_basic);
                 sched_fps+=result_p_fps;
                 w_sched_fps+=(taskset_util*(float)result_p_fps);
                 
-                int result_rds=eager_lp_fps_rta(taskset, NO_OF_PROCESSORS,print_log, print_basic);
+                int result_rds=eager_lp_fps_rta(taskset, NO_OF_PROCESSORS, print_log, print_basic);
                 sched_rds+=result_rds;
                 w_sched_rds+=(taskset_util*(float)result_rds);
                 
@@ -254,8 +255,8 @@ void varying_tasks(int MAX_NO_OF_TASKS, int number_of_tasks, float MIN_UTIL, flo
             if(print_inter)
             {
                 cout<<"\nUtilization: "<<cur_util;
-//                cout<<"\nPreemptions P-FPS: "<<(no_of_preemptions_fps/MAX_TASKSETS_PER_SIMULATION)<<" Preemptions RDS-FPS : "<<(no_of_preemptions_rds/MAX_TASKSETS_PER_SIMULATION);
-//                cout<<" Preemptions ADS-FPS : "<<(no_of_preemptions_ads/MAX_TASKSETS_PER_SIMULATION);
+                //cout<<"\nPreemptions P-FPS: "<<(no_of_preemptions_fps/MAX_TASKSETS_PER_SIMULATION)<<" Preemptions RDS-FPS : "<<(no_of_preemptions_rds/MAX_TASKSETS_PER_SIMULATION);
+                //cout<<" Preemptions ADS-FPS : "<<(no_of_preemptions_ads/MAX_TASKSETS_PER_SIMULATION);
                 
                 cout<<"\nPreemptions P-FPS_d_c: "<<(no_of_preemptions_fps_d_c/MAX_TASKSETS_PER_SIMULATION)<<" Preemptions RDS-FPS_d_c: "<<(no_of_preemptions_rds_d_c/MAX_TASKSETS_PER_SIMULATION);
                 cout<<" Preemptions ADS-FPS_d_c: "<<(no_of_preemptions_ads_d_c/MAX_TASKSETS_PER_SIMULATION);
@@ -270,7 +271,7 @@ void varying_tasks(int MAX_NO_OF_TASKS, int number_of_tasks, float MIN_UTIL, flo
         f_normal<<"\n\n";
         f_sched_weighted<<(w_sched_fps/util_sum)<<"\t"<<(w_sched_rds/util_sum)<<"\t"<<(w_sched_ads_link/util_sum)<<"\t"<<(w_sched_ads_exact/util_sum)<<"\n";
         
-//        cout<<"\n\nWeighted preemptions P-FPS: "<<(fps/util_sum)<<" Weighted preemptions RDS-FPS: "<<(rds/util_sum)<<" Weighted preemptions ADS-FPS: "<<(ads/util_sum);
+        //cout<<"\n\nWeighted preemptions P-FPS: "<<(fps/util_sum)<<" Weighted preemptions RDS-FPS: "<<(rds/util_sum)<<" Weighted preemptions ADS-FPS: "<<(ads/util_sum);
         cout<<"\n\nWeighted preemptions P-FPS_d_c: "<<(fps_d_c/util_sum)<<" Weighted preemptions RDS-FPS_d_c: "<<(rds_d_c/util_sum)<<" Weighted preemptions ADS-FPS_d_c: "<<(ads_d_c/util_sum);        
         cout<<"\nWighted Sched P_FPS_d_c: "<<(w_sched_fps/util_sum)<<" Eager FPS:"<<(w_sched_rds/util_sum)<<" Link based: "<<(w_sched_ads_link/util_sum)<<" Lazy-LP-FPS-exact: "<<(w_sched_ads_exact/util_sum)<<"\n";;
         number_of_tasks+=2;
