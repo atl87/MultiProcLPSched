@@ -104,7 +104,7 @@ void varying_tasks(int MAX_NO_OF_TASKS, int number_of_tasks, float MIN_UTIL, flo
             sched_ads_exact=0;
             while(counter<=MAX_TASKSETS_PER_SIMULATION)
             {
-                cout<<"\n\nTaskset number: "<<counter;
+                cout<<"\n\nTaskset number: "<<counter<<"("<<number_of_tasks<<")";
                 DEADLINE_FRACTION=((float) rand() / (RAND_MAX))+0.7;
                 if(DEADLINE_FRACTION>1.000)
                     DEADLINE_FRACTION=1.0000;
@@ -287,16 +287,16 @@ void varying_processors(int number_of_tasks, float MIN_UTIL, float MAX_UTIL, int
 
     srand (time(NULL));
     fstream f_weighted, f_normal, f_sched_weighted, f_sched_normal;
-    f_weighted.open("./results/weighted_results_proc.txt",ios::out);
+    f_weighted.open("./results/weighted_vary_proc_preemptions.txt",ios::out);
     if(!f_weighted)
     {
-        cout<<"\nError opening file: ./results/weighted_results_proc.txt";
+        cout<<"\nError opening file: ./results/weighted_vary_proc_preemptions.txt";
         exit(1);
     }
-    f_normal.open("./results/normal_results_proc.txt",ios::out);
+    f_normal.open("./results/normal_vary_proc_preemptions.txt",ios::out);
     if(!f_normal)
     {
-        cout<<"\nError opening file: ./results/normal_results_proc.txt";
+        cout<<"\nError opening file: ./normal_vary_proc_preemptions.txt";
         exit(1);
     }
     f_sched_weighted.open("./results/weighted_vary_proc_sched.txt",ios::out);
