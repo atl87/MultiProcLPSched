@@ -15,30 +15,36 @@ void varying_tasks(int MAX_NO_OF_TASKS, int number_of_tasks, float MIN_UTIL, flo
 {
     srand (time(NULL));
     fstream f_weighted, f_normal, f_sched_weighted, f_sched_normal;
-    f_weighted.open("./results/weighted_vary_tasks_preemptions.txt",ios::out);
+            
+    f_weighted.open("./results/weighted_vary_tasks_preemptions.txt", ios::out);
     if(!f_weighted)
     {
         cout<<"\nError opening file: ./results/weighted_vary_tasks_preemptions.txt";
         exit(1);
     }
-    f_normal.open("./results/normal_vary_tasks_preemptions.txt",ios::out);
+    f_normal.open("./results/normal_vary_tasks_preemptions.txt", ios::out);
     if(!f_normal)
     {
         cout<<"\nError opening file: ./results/normal_vary_tasks_preemptions.txt";
         exit(1);
     }
-    f_sched_weighted.open("./results/weighted_vary_tasks_sched.txt",ios::out);
+    f_sched_weighted.open("./results/weighted_vary_tasks_sched.txt", ios::out);
     if(!f_sched_weighted)
     {
         cout<<"\nError opening file: ./results/weighted_vary_tasks_sched.txt";
         exit(1);
     }    
-    f_sched_normal.open("./results/normal_vary_tasks_sched.txt",ios::out);
+    f_sched_normal.open("./results/normal_vary_tasks_sched.txt", ios::out);
     if(!f_sched_normal)
     {
         cout<<"\nError opening file: ./results/normal_vary_tasks_sched.txt";
         exit(1);
-    }   
+    } 
+    
+    f_normal.close();
+    f_weighted.close();
+    f_sched_normal.close();
+    f_sched_weighted.close();
 /******************************CONTROL VARIABLES******************************/    
     int print_basic=1;
     int print_log=0;
@@ -68,6 +74,31 @@ void varying_tasks(int MAX_NO_OF_TASKS, int number_of_tasks, float MIN_UTIL, flo
         
         float cur_util=MIN_UTIL;
         float max_util=MAX_UTIL;
+        
+        f_weighted.open("./results/weighted_vary_tasks_preemptions.txt", ios::app);
+        if(!f_weighted)
+        {
+            cout<<"\nError opening file: ./results/weighted_vary_tasks_preemptions.txt";
+            exit(1);
+        }
+        f_normal.open("./results/normal_vary_tasks_preemptions.txt", ios::app);
+        if(!f_normal)
+        {
+            cout<<"\nError opening file: ./results/normal_vary_tasks_preemptions.txt";
+            exit(1);
+        }
+        f_sched_weighted.open("./results/weighted_vary_tasks_sched.txt", ios::app);
+        if(!f_sched_weighted)
+        {
+            cout<<"\nError opening file: ./results/weighted_vary_tasks_sched.txt";
+            exit(1);
+        }    
+        f_sched_normal.open("./results/normal_vary_tasks_sched.txt", ios::app);
+        if(!f_sched_normal)
+        {
+            cout<<"\nError opening file: ./results/normal_vary_tasks_sched.txt";
+            exit(1);
+        } 
         
         fps=0.0000;
         rds=0.0000;
@@ -103,7 +134,7 @@ void varying_tasks(int MAX_NO_OF_TASKS, int number_of_tasks, float MIN_UTIL, flo
             sched_ads_link=0;
             sched_ads_exact=0;
             while(counter<=MAX_TASKSETS_PER_SIMULATION)
-            {
+            {                                 
                 cout<<"\n\nTaskset number: "<<counter<<"("<<number_of_tasks<<")";
                 DEADLINE_FRACTION=((float) rand() / (RAND_MAX))+0.7;
                 if(DEADLINE_FRACTION>1.000)
@@ -275,11 +306,13 @@ void varying_tasks(int MAX_NO_OF_TASKS, int number_of_tasks, float MIN_UTIL, flo
         cout<<"\n\nWeighted preemptions P-FPS_d_c: "<<(fps_d_c/util_sum)<<" Weighted preemptions RDS-FPS_d_c: "<<(rds_d_c/util_sum)<<" Weighted preemptions ADS-FPS_d_c: "<<(ads_d_c/util_sum);        
         cout<<"\nWighted Sched P_FPS_d_c: "<<(w_sched_fps/util_sum)<<" Eager FPS:"<<(w_sched_rds/util_sum)<<" Link based: "<<(w_sched_ads_link/util_sum)<<" Lazy-LP-FPS-exact: "<<(w_sched_ads_exact/util_sum)<<"\n";;
         number_of_tasks+=2;
+        
+        f_normal.close();
+        f_weighted.close();
+        f_sched_normal.close();
+        f_sched_weighted.close();
     }
     
-    
-    f_normal.close();
-    f_weighted.close();
 }
 
 void varying_processors(int number_of_tasks, float MIN_UTIL, float MAX_UTIL, int MAX_TASKSETS_PER_SIMULATION, int MIN_PERIOD, int MAX_PERIOD, float npr_percentage, float MIN_NO_PROC, float MAX_NO_PROC, int MAX_TIME)
